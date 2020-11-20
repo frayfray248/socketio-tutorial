@@ -13,11 +13,18 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-// socket connection detection
+// socket connection
 io.on('connection', (socket) => {
     console.log('a user connected');
+
+    // disconnect event
     socket.on('disconnect', () => {
         console.log('user disconnected');
+    })
+
+    // chat message event
+    socket.on('chat message', (msg) => {
+        console.log('message: ' + msg);
     })
 });
 
